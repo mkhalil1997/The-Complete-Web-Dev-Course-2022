@@ -8,7 +8,10 @@ function nextLevel(){
   checkList.push(randomColor);
   $("h1").text("Level "+checkList.length)
   counter = 0
-  console.log(checkList)
+  $("#"+randomColor).fadeOut(200);
+  $("#"+randomColor).fadeIn(200);
+  var audio = new Audio('sounds/'+randomColor+'.mp3');
+  audio.play();
 }
 
 $(document).keypress(function(event){
@@ -32,11 +35,13 @@ $(".btn").click(function(){
     checkList=[]
     counter = 0
     $("h1").text("Game over! Press a Key to restart.")
+    $("body").css("background-color", "red")
+    setTimeout(() => {$("body").css("background-color", "#011F3F")}, 150)
   }
   else{
     counter ++;
   }
   if(checkList.length==counter && checkList.length != 0){
-    nextLevel()
+    setTimeout(() => { nextLevel() }, 800);
   }
 });
